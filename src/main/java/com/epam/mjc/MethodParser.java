@@ -38,8 +38,13 @@ public class MethodParser {
         String returnType = matcher.group("returnType");
         String methodName = matcher.group("methodName");
         String argumentsString = matcher.group("arguments");
+        List<MethodSignature.Argument> arguments = parseArguments(argumentsString);
 
-        return null;
+        MethodSignature methodSignature = new MethodSignature(methodName, arguments);
+        methodSignature.setAccessModifier(accessModifier);
+        methodSignature.setReturnType(returnType);
+
+        return methodSignature;
     }
 
     private List<MethodSignature.Argument> parseArguments(String argumentsString) {
